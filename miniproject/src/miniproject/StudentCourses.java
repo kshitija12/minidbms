@@ -299,9 +299,10 @@ public void view_all_courses() //all courses
         //super.setVisible(false);
        // this.dispose();
        // SignIn si;
-       // si = new SignIn();
-       // si.setVisible(true);
-        System.exit(0);
+        SignIn si = new SignIn();
+        si.setVisible(true);
+       // System.exit(0);
+       this.dispose();
     }//GEN-LAST:event_log_outActionPerformed
 
    
@@ -334,9 +335,9 @@ public void view_all_courses() //all courses
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
+        /*java.awt.EventQueue.invokeLater(() -> {
             new StudentCourses().setVisible(true);
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -90,17 +90,6 @@ public class Courses extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("WELCOME STAFF");
 
-        coursetable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         jScrollPane1.setViewportView(coursetable);
 
         jLabel2.setText("Course ID");
@@ -261,6 +250,14 @@ public void view_all_courses() //all courses
           
       }
 }
+public void set_null(){
+    String a=null;
+    cid.setText(a);
+    cname.setText(a);
+    desc.setText(a);
+    //sdate.setText(a);
+    //edate.setText(a);
+}
     private void update_courseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_courseActionPerformed
         try
         {  
@@ -309,7 +306,8 @@ public void view_all_courses() //all courses
                     JOptionPane.showMessageDialog(this,"Courseid not valid!");    
                         
                 }   
-            }  
+            }
+            set_null();
      }
     
     catch (SQLException ex)
@@ -393,7 +391,7 @@ public void view_all_courses() //all courses
                 }
             }
         }
-        
+       set_null(); 
      }
     
     catch (SQLException ex)
@@ -417,8 +415,12 @@ public void view_all_courses() //all courses
     
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_outActionPerformed
         JOptionPane.showMessageDialog(this,"Bye!");
-        System.exit(0);
-        // TODO add your handling code here:
+        //System.exit(0);
+        
+        SignIn si = new SignIn();
+        si.setVisible(true);
+        this.dispose();
+// TODO add your handling code here:
     }//GEN-LAST:event_log_outActionPerformed
 
     private void remove_courseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_courseActionPerformed
@@ -470,7 +472,7 @@ public void view_all_courses() //all courses
                     }
                 }
             }
-        
+        set_null();
         }
     catch (SQLException ex)
     {
@@ -505,13 +507,13 @@ public void view_all_courses() //all courses
      public static String uname; 
     public static void main(String args[]) {
        uname=args[0];
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       /* Create and display the form 
+       / java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Courses().setVisible(true);
 
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

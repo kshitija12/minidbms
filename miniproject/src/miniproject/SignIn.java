@@ -226,6 +226,7 @@ public class SignIn extends javax.swing.JFrame {
                          c.setVisible(true);
                          c.main(info);
                      }
+                    //this.setVisible(true);
                     this.dispose();
                 }
                 else{
@@ -233,6 +234,7 @@ public class SignIn extends javax.swing.JFrame {
                 }
             }
         }
+            set_null();
         }
         catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
@@ -243,7 +245,11 @@ public class SignIn extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_logInActionPerformed
-
+public void set_null(){
+    String a=null;
+    username.setText(a);
+    password.setText(a);
+}
     private void Sign_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sign_inActionPerformed
        try{
             String uname,pwd;
@@ -268,8 +274,8 @@ public class SignIn extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             if(flag==1)
             {
-                try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniproject","root","Kshitija123!"))
-                    {
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniproject","root","Kshitija123!");
+                    
                         PreparedStatement ps = con.prepareStatement("select * from user where name = ? and password = ?;");
                         ps.setString(1,uname);
                         ps.setString(2,pwd);
@@ -296,15 +302,16 @@ public class SignIn extends javax.swing.JFrame {
                             }
                         }
                     }
-            }
+            
+            //set_null();
        }
         catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this,"Username exists! Select new one");   
         }
         
-        catch(HeadlessException e){
+      /*  catch(HeadlessException e){
             System.out.println(e.getMessage());    
-        }
+        }*/
          // TODO add your handling code here:
     }//GEN-LAST:event_Sign_inActionPerformed
 
