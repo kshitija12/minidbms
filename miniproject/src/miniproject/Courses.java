@@ -7,19 +7,15 @@ package miniproject;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static miniproject.StudentCourses.uname;
 
 /**
  *
@@ -63,6 +59,9 @@ public class Courses extends javax.swing.JFrame {
         view_all = new javax.swing.JButton();
         sdate = new com.toedter.calendar.JDateChooser();
         edate = new com.toedter.calendar.JDateChooser();
+        enrol = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        seats = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,7 +91,7 @@ public class Courses extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(coursetable);
 
-        jLabel2.setText("Course ID");
+        jLabel2.setText("Course ID (*)");
 
         jLabel3.setText("Start Date");
 
@@ -120,6 +119,21 @@ public class Courses extends javax.swing.JFrame {
             }
         });
 
+        enrol.setText("View Enrollment");
+        enrol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrolActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Seats");
+
+        seats.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seatsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,47 +153,50 @@ public class Courses extends javax.swing.JFrame {
                                 .addComponent(view_all)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addGap(13, 13, 13))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(18, 18, 18)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cid)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 2, Short.MAX_VALUE)))))
-                                .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cname, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(38, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(insert_course, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(remove_course)
-                                .addGap(88, 88, 88))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(update_course, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(181, 181, 181))))))
+                                .addGap(90, 90, 90)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(insert_course, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                                    .addComponent(enrol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(remove_course)
+                                        .addGap(88, 88, 88))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(70, 70, 70)
+                                        .addComponent(update_course, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel8))
+                                        .addGap(13, 13, 13)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cid)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(seats))))
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cname, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(343, 343, 343)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,40 +209,47 @@ public class Courses extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(cid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(cname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabel5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(view_all, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(cid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
+                                .addComponent(cname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(view_all)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(2, 2, 2)
+                                            .addComponent(jLabel3)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8)
+                                        .addComponent(seats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(30, 30, 30)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(enrol)
+                                        .addComponent(update_course))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel6))
-                                    .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(update_course)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(remove_course)
-                                    .addComponent(insert_course))
-                                .addGap(15, 15, 15)))))
-                .addGap(18, 26, Short.MAX_VALUE)
+                                        .addComponent(remove_course)
+                                        .addComponent(insert_course))
+                                    .addGap(15, 15, 15)))
+                            .addComponent(jLabel6))))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(log_out)
                 .addGap(8, 8, 8))
         );
@@ -255,6 +279,7 @@ public void set_null(){
     cid.setText(a);
     cname.setText(a);
     desc.setText(a);
+    seats.setText(a);
     //sdate.setText(a);
     //edate.setText(a);
 }
@@ -262,9 +287,10 @@ public void set_null(){
         try
         {  
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniproject","root","Kshitija123!");
-            int courseid;
+            int courseid,a_seats;
             String c_name,s_date,e_date,c_desc,c_id;
             c_id=cid.getText();
+            a_seats=Integer.parseInt(seats.getText());
             c_name=cname.getText();
             c_desc=desc.getText();
             Calendar cal = sdate.getCalendar();
@@ -275,43 +301,35 @@ public void set_null(){
             int datevar1 = cal1.get(Calendar.DATE);int monthvar1 = cal1.get(Calendar.MONTH);int yearvar1= cal1.get(Calendar.YEAR);
             String datev1 = Integer.toString(datevar1);String monthv1 = Integer.toString(monthvar1);String yearv1= Integer.toString(yearvar1);
             e_date=(datev1+"/"+monthv1+"/"+yearv1);
-            //make sure all fields have data
-            if(c_id==null | c_name==null | c_desc==null | s_date==null | e_date==null) //fields missing
+            courseid = Integer.parseInt(c_id);
+            PreparedStatement ps1 = con.prepareStatement("select * from course where courseid= ?;");
+            ps1.setInt(1,courseid);
+            ResultSet r3 = ps1.executeQuery();
+            if(r3.next())           //course exists in table can update
             {
-                JOptionPane.showMessageDialog(this,"Please insert data in all fields");
+                PreparedStatement p1 = con.prepareStatement("update course set course_name=?,start=?,end=?,description=?,seats=? where courseid=?;");
+                p1.setString(1,c_name);
+                p1.setString(2,s_date);
+                p1.setString(3,e_date);
+                p1.setString(4,c_desc);
+                p1.setInt(5,a_seats);
+                p1.setInt(6,courseid);
+                int r = p1.executeUpdate();
+                if(r > 0)
+                {
+                    JOptionPane.showMessageDialog(this,"Course updated  successfully!");
+                    view_all_courses();
+                    set_null();
+                } 
             }
-            else        //check if course in table
+            else                    //course not in table. Can be inserted
             {
-                courseid = Integer.parseInt(c_id);
-                PreparedStatement ps1 = con.prepareStatement("select * from course where courseid= ?;");
-                ps1.setInt(1,courseid);
-                ResultSet r3 = ps1.executeQuery();
-                if(r3.next())           //course exists in table can update
-                {
-                    PreparedStatement p1 = con.prepareStatement("update course set course_name=?,start=?,end=?,description=? where courseid=?;");
-                    p1.setString(1,c_name);
-                    p1.setString(2,s_date);
-                    p1.setString(3,e_date);
-                    p1.setString(4,c_desc);
-                    p1.setInt(5,courseid);
-                    int r = p1.executeUpdate();
-                    if(r > 0)
-                    {
-                        JOptionPane.showMessageDialog(this,"Course updated  successfully!");
-                        view_all_courses();
-                    } 
-                }
-                else                    //course not in table. Can be inserted
-                {
-                    JOptionPane.showMessageDialog(this,"Courseid not valid!");    
-                        
-                }   
-            }
-            set_null();
+                JOptionPane.showMessageDialog(this,"Courseid not valid!");    
+            }   
+            
      }
     
-    catch (SQLException ex)
-    {
+    catch (SQLException ex){
            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
            System.out.println(ex.getMessage());    
     }
@@ -319,13 +337,12 @@ public void set_null(){
     {
         System.out.println(e.getMessage());    
     }
-     catch (NullPointerException e){
+    catch (NullPointerException e){
         JOptionPane.showMessageDialog(this,"Enter values in all fields!");
      }
-     catch (NumberFormatException nfe) {
-                 System.out.println(nfe.getMessage());    
-      JOptionPane.showMessageDialog(this,"Courseid should be int value!");
-    }// TODO add your handling code here:
+    catch (NumberFormatException nfe) {
+        JOptionPane.showMessageDialog(this,"Courseid and seats should be int values!");
+     }
     }//GEN-LAST:event_update_courseActionPerformed
 
     private void insert_courseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_courseActionPerformed
@@ -344,9 +361,10 @@ public void set_null(){
             }
             else                                    //user is admin
             {
-                int courseid;
+                int courseid,a_seats;
                 String c_name,s_date,e_date,c_desc,c_id;
                 c_id=cid.getText();
+                a_seats=Integer.parseInt(seats.getText());
                 c_name=cname.getText();
                 c_desc=desc.getText();
                 Calendar cal = sdate.getCalendar();
@@ -357,13 +375,6 @@ public void set_null(){
                 int datevar1 = cal1.get(Calendar.DATE);int monthvar1 = cal1.get(Calendar.MONTH);int yearvar1= cal1.get(Calendar.YEAR);
                 String datev1 = Integer.toString(datevar1);String monthv1 = Integer.toString(monthvar1);String yearv1= Integer.toString(yearvar1);
                 e_date=(datev1+"/"+monthv1+"/"+yearv1);
-                //make sure all fields have data
-                if(c_id==null | c_name==null | c_desc==null | s_date==null | e_date==null) //fields missing
-                {
-                    JOptionPane.showMessageDialog(this,"Please insert data in all fields");
-                }
-                else        //check if course already in table
-                {
                     courseid = Integer.parseInt(c_id);
                     PreparedStatement ps1 = con.prepareStatement("select * from course where courseid= ?;");
                     ps1.setInt(1,courseid);
@@ -374,24 +385,24 @@ public void set_null(){
                     }
                     else                    //course not in table. Can be inserted
                     {
-                        PreparedStatement p1 = con.prepareStatement("insert into course values (?,?,?,?,?);");
+                        PreparedStatement p1 = con.prepareStatement("insert into course values (?,?,?,?,?,?);");
                         p1.setInt(1,courseid);
                         p1.setString(2,c_name);
                         p1.setString(3,s_date);
                         p1.setString(4,e_date);
                         p1.setString(5,c_desc);
+                        p1.setInt(6,a_seats);
                         int r = p1.executeUpdate();
                         if(r > 0)
                         {
                             JOptionPane.showMessageDialog(this,"Course added successfully!");
                             view_all_courses();
+                            set_null(); 
                         } 
                         
                     }   
                 }
-            }
-        }
-       set_null(); 
+           }
      }
     
     catch (SQLException ex)
@@ -408,19 +419,16 @@ public void set_null(){
      }
      catch (NumberFormatException nfe) {
                  System.out.println(nfe.getMessage());    
-      JOptionPane.showMessageDialog(this,"Courseid should be int value!");
+      JOptionPane.showMessageDialog(this,"Courseid and seats should be int values!");
         }
     }//GEN-LAST:event_insert_courseActionPerformed
 
     
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_outActionPerformed
         JOptionPane.showMessageDialog(this,"Bye!");
-        //System.exit(0);
-        
         SignIn si = new SignIn();
         si.setVisible(true);
         this.dispose();
-// TODO add your handling code here:
     }//GEN-LAST:event_log_outActionPerformed
 
     private void remove_courseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_courseActionPerformed
@@ -462,6 +470,7 @@ public void set_null(){
                             {
                                 JOptionPane.showMessageDialog(this,"Course deleted successfully!");
                                 view_all_courses();
+                                set_null();
                             } 
                         }
                         else                    //course not in table
@@ -472,7 +481,6 @@ public void set_null(){
                     }
                 }
             }
-        set_null();
         }
     catch (SQLException ex)
     {
@@ -487,20 +495,34 @@ public void set_null(){
         JOptionPane.showMessageDialog(this,"Enter values in all fields!");
      }
      catch (NumberFormatException nfe) {
-                 System.out.println(nfe.getMessage());    
-      JOptionPane.showMessageDialog(this,"Courseid should be int value!");
+        JOptionPane.showMessageDialog(this,"Courseid should be int value!");
     }
-                                        
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_remove_courseActionPerformed
 
-  
-     
-                                                 
+    private void enrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrolActionPerformed
+    try{
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniproject","root","Kshitija123!");
+        int courseid;
+        courseid = Integer.parseInt(cid.getText());
+        PreparedStatement ps = con.prepareStatement("select name as Students from enrolment where courseid= ?;");
+        ps.setInt(1,courseid);
+        ResultSet rs1 = ps.executeQuery();
+        coursetable.setModel(net.proteanit.sql.DbUtils.resultSetToTableModel(rs1)); 
+    }
+    catch (NumberFormatException nfe) {
+      JOptionPane.showMessageDialog(this,"Enter correct course id!");
+    }   
+    catch (SQLException ex) {
+            Logger.getLogger(Courses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_enrolActionPerformed
 
-    
-   
-   
+    private void seatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seatsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_seatsActionPerformed
+                                  
+  
     /**
      * @param args the command line arguments
      */
@@ -522,6 +544,7 @@ public void set_null(){
     private javax.swing.JTable coursetable;
     private javax.swing.JTextArea desc;
     private com.toedter.calendar.JDateChooser edate;
+    private javax.swing.JButton enrol;
     private javax.swing.JButton insert_course;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -530,11 +553,13 @@ public void set_null(){
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton log_out;
     private javax.swing.JButton remove_course;
     private com.toedter.calendar.JDateChooser sdate;
+    private javax.swing.JTextField seats;
     private javax.swing.JButton update_course;
     private javax.swing.JButton view_all;
     // End of variables declaration//GEN-END:variables

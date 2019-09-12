@@ -12,8 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -22,11 +20,6 @@ import net.proteanit.sql.DbUtils;
  * @author admin
  */
 public class StudentCourses extends javax.swing.JFrame {
-
-
-    /**
-     * Creates new form StudentCourses
-     */
     public StudentCourses() {
         initComponents();
     }
@@ -44,7 +37,6 @@ public class StudentCourses extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         courses_table = new javax.swing.JTable();
         add_course = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         std_name = new javax.swing.JLabel();
         courseid = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -67,9 +59,7 @@ public class StudentCourses extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("COURSES");
-
-        jLabel3.setText("Course ID");
+        jLabel3.setText("Course ID (*) ");
 
         remove_course.setText("Remove Course");
         remove_course.addActionListener(new java.awt.event.ActionListener() {
@@ -103,43 +93,40 @@ public class StudentCourses extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(381, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(158, 158, 158))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                                .addComponent(courseid, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(courseid, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(69, 69, 69)
-                                        .addComponent(log_out))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(remove_course)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(std_name)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(std_name)
+                                    .addComponent(remove_course))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(add_course, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(29, 29, 29))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(73, 73, 73)
                                 .addComponent(jButton3)
                                 .addGap(18, 18, 18)
                                 .addComponent(view_button, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(158, 158, 158))))))
+                                .addComponent(log_out)
+                                .addGap(138, 138, 138))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,27 +138,27 @@ public class StudentCourses extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(view_button)
                             .addComponent(jButton3))
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(courseid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(remove_course)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addComponent(std_name)
+                                .addGap(72, 72, 72))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(add_course)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(log_out)
+                        .addGap(44, 44, 44))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(34, 34, 34))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(courseid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(std_name, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(remove_course)
-                                .addComponent(add_course)))
-                        .addGap(88, 88, 88)
-                        .addComponent(log_out)
-                        .addGap(28, 28, 28))))
+                        .addContainerGap())))
         );
 
         pack();
@@ -183,11 +170,10 @@ public void view_table() //my courses
         ps.setString(1,uname);
         ResultSet rs = ps.executeQuery();
         courses_table.setModel(DbUtils.resultSetToTableModel(rs)); 
-
       }
       catch (SQLException e)
       {
-          
+              JOptionPane.showMessageDialog(null, e);
       }
 }
 public void view_all_courses() //all courses
@@ -201,14 +187,13 @@ public void view_all_courses() //all courses
       }
       catch (SQLException e)
       {
-          
+              JOptionPane.showMessageDialog(null, e);
       }
 }
     private void view_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_buttonActionPerformed
 
         try{
-      view_table();
-    }
+      view_table();}
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
     }
@@ -229,21 +214,29 @@ public void view_all_courses() //all courses
                 {
                     JOptionPane.showMessageDialog(this,"Course removed successfully!");
                     view_table();
+                    PreparedStatement p3 = con.prepareStatement("update course set seats=seats+1 where courseid = ?;");
+                    p3.setInt(1,cid);
+                    int r3 = p3.executeUpdate();
+                    if (r3 < 0){
+                            JOptionPane.showMessageDialog(this,"Error in updating seat value!");
+                    }
+                    courseid.setText(null);
                 }
                 else
                 {
                     JOptionPane.showMessageDialog(this,"You have not registered for this course!");
-
                 } 
-           }
-                    
-       catch (SQLException ex) {
-            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
+           }             
+       catch (SQLException ex ) {
+             JOptionPane.showMessageDialog(this,"Enter correct Course id!!");
         }
-        
+        catch (NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(this,"Enter Correct Course id!!");
+        }
         catch(HeadlessException e){
             System.out.println(e.getMessage());    
-        }
+        }  
     }//GEN-LAST:event_remove_courseActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -252,57 +245,69 @@ public void view_all_courses() //all courses
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void add_courseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_courseActionPerformed
-
-     int cid;
-     cid = Integer.parseInt(courseid.getText());
+    int cid;
      try{
+        cid = Integer.parseInt(courseid.getText());
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniproject","root","Kshitija123!");
         PreparedStatement ps = con.prepareStatement("select * from enrolment where courseid= ? and name= ?;");
         ps.setInt(1,cid);
         ps.setString(2,uname);
         ResultSet rs = ps.executeQuery();
-        if(rs.next())
-        {
+        if(rs.next()){
         JOptionPane.showMessageDialog(this,"You have already registered for this course!");
-
         }
         else
-        {
-            PreparedStatement p3 = con.prepareStatement("insert into enrolment values (? , ?);");
-            p3.setString(1,uname);
-            p3.setInt(2,cid);
-            int r2 = p3.executeUpdate();
-            if(r2 > 0){
-                JOptionPane.showMessageDialog(this,"Course added successfully!");
-                view_table();
+        {                           //check if seats available
+            PreparedStatement p = con.prepareStatement("select * from course where courseid= ?");
+            p.setInt(1,cid);
+            ResultSet r = p.executeQuery();
+            if (r.next()){
+                int s = r.getInt("seats");
+                if (s<=0){
+                    JOptionPane.showMessageDialog(this,"No seats available! Check back later");
+                }
+                else if (s>0){
+                    PreparedStatement p3 = con.prepareStatement("insert into enrolment values (? , ?);");
+                    p3.setString(1,uname);
+                    p3.setInt(2,cid);
+                    int r2 =p3.executeUpdate();
+                    if(r2 > 0){
+                        JOptionPane.showMessageDialog(this,"Course added successfully!");
+                        PreparedStatement p4 = con.prepareStatement("update course set seats=seats-1 where courseid=?;");
+                        p4.setInt(1,cid);
+                        int r3 = p4.executeUpdate();
+                        if(r3<0){
+                            JOptionPane.showMessageDialog(this,"Error updating seat value");
+                        }
+                        view_table();
+                        courseid.setText(null);
+                        }
+                }
             }
-             else{
-                JOptionPane.showMessageDialog(this,"Course doesnt exist!");
+            else{
+               JOptionPane.showMessageDialog(this,"Course doesnt exist!");
             } 
         }
+       
       }
              
         catch (SQLException ex) {
-            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(this,"Enter correct Course id!");
         }
-        
+        catch (NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(this,"Enter correct Course id!!");
+        }
         catch(HeadlessException e){
             System.out.println(e.getMessage());    
         }
-    // TODO add your handling code here:
     }//GEN-LAST:event_add_courseActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_outActionPerformed
-        // TODO add your handling code here:
         JOptionPane.showMessageDialog(this,"Bye!");
-       // this.setVisible(false);
-        //super.setVisible(false);
-       // this.dispose();
-       // SignIn si;
         SignIn si = new SignIn();
         si.setVisible(true);
-       // System.exit(0);
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_log_outActionPerformed
 
    
@@ -346,7 +351,6 @@ public void view_all_courses() //all courses
     private javax.swing.JTable courses_table;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton log_out;
